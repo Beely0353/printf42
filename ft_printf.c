@@ -6,7 +6,7 @@
 /*   By: baroun <baroun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:43:48 by baroun            #+#    #+#             */
-/*   Updated: 2021/11/12 15:32:19 by baroun           ###   ########.fr       */
+/*   Updated: 2021/11/12 16:17:42 by baroun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ int	ft_is_arg(const char flag)
 static int	ft_arg(const char s, va_list ap, int len)
 {
 	if (s == '%')
-		len = ft_putchar(s);
+		len += ft_putchar(s);
 	if (s == 'c')
-		len = ft_putchar(va_arg(ap, int));
+		len += ft_putchar(va_arg(ap, int));
 	else if (s == 's')
-		len = ft_putstr(va_arg(ap, char *));
+		len += ft_putstr(va_arg(ap, char *));
 	else if (s == 'p')
-		len = ft_putptr(va_arg(ap, void *));
+		len += ft_putptr(va_arg(ap, void *));
 	else if (s == 'd')
-		len = ft_putnbr(va_arg(ap, int));
+		len += ft_putnbr(va_arg(ap, int));
 	else if (s == 'i')
-		len = ft_putnbr(va_arg(ap, int));
+		len += ft_putnbr(va_arg(ap, int));
 	else if (s == 'u')
-		len = ft_putunbr(va_arg(ap, unsigned int));
+		len += ft_putunbr(va_arg(ap, unsigned int));
 	else if (s == 'x')
-		len = ft_putunbr_base(va_arg(ap, unsigned int), "0123456789abcdef");
+		len += ft_putunbr_base(va_arg(ap, unsigned int), "0123456789abcdef");
 	else if (s == 'X')
-		len = ft_putunbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
+		len += ft_putunbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
 	return (len);
 }
 
@@ -50,7 +50,7 @@ static int	ft_argnbr(const char *s, va_list ap)
 		if (*s == '%' && ft_is_arg(*(s + 1)))
 		{
 			s++;
-			len += ft_arg(*s, ap, len);
+			len = ft_arg(*s, ap, len);
 		}
 		else
 		{
